@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Footer, Header, MobileCallBar } from "./components/Sections";
-import { EdgeFoliage, StickyLeaf } from "./components/DecorBits";
+import { EdgeFoliage, StickyTool } from "./components/DecorBits";
+import GutterLoader from "./components/GutterLoader";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Services from "./pages/Services";
@@ -11,8 +13,14 @@ import BlogPost from "./pages/BlogPost";
 import ContactPage from "./pages/ContactPage";
 
 export default function App() {
+  const [loading, setLoading] = useState(true);
+  const reducedMotion =
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   return (
     <BrowserRouter>
+      {loading && !reducedMotion && <GutterLoader onDone={() => setLoading(false)} />}
       <div
         id="top"
         className="min-h-screen bg-cream pb-[calc(3.75rem+env(safe-area-inset-bottom))] md:pb-0"
@@ -33,7 +41,7 @@ export default function App() {
         </main>
         <Footer />
         <MobileCallBar />
-        <StickyLeaf />
+        <StickyTool />
         <EdgeFoliage />
       </div>
     </BrowserRouter>

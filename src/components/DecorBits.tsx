@@ -1,26 +1,55 @@
 import { useEffect, useRef } from "react";
 
-/* ---------- 1. Sticky corner leaf: fixed, bobbing, never clickable ---------- */
-export function StickyLeaf() {
+/* ---------- Shared: gutter scoop tool (hand-drawn SVG, no photo assets) ---------- */
+export function GutterScoop() {
+  return (
+    <svg viewBox="0 0 120 120" className="h-full w-full drop-shadow-lg" aria-hidden="true">
+      {/* shaft */}
+      <rect x="62" y="18" width="14" height="58" rx="7" transform="rotate(28 69 47)" fill="#2E4257" />
+      {/* scoop cup */}
+      <path
+        d="M14 74 C14 98 32 112 56 112 C78 112 94 100 96 84 L84 76 C76 88 64 94 50 92 C36 90 24 86 14 74 Z"
+        fill="#8FA9C4"
+      />
+      <path
+        d="M14 74 C14 98 32 112 56 112 C78 112 94 100 96 84"
+        fill="none"
+        stroke="#2E4257"
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+      <path d="M24 82 C32 92 44 97 56 95" fill="none" stroke="#5B7A99" strokeWidth="2" opacity="0.7" />
+      {/* leaves caught in the scoop */}
+      <ellipse cx="48" cy="90" rx="11" ry="6" fill="#C98A2B" transform="rotate(-16 48 90)" />
+      <ellipse cx="65" cy="94" rx="9" ry="5" fill="#A65A1E" transform="rotate(12 65 94)" />
+      <path d="M40 88 L56 92" stroke="#5e3d12" strokeWidth="1.2" strokeLinecap="round" />
+      {/* grip */}
+      <rect x="78" y="4" width="22" height="26" rx="10" transform="rotate(28 89 17)" fill="#5B7A99" />
+      <rect
+        x="78"
+        y="4"
+        width="22"
+        height="26"
+        rx="10"
+        transform="rotate(28 89 17)"
+        fill="none"
+        stroke="#22303f"
+        strokeWidth="2"
+      />
+    </svg>
+  );
+}
+
+/* ---------- 1. Sticky corner tool: fixed, bobbing, never clickable ---------- */
+export function StickyTool() {
   return (
     <div
       className="pointer-events-none fixed bottom-24 left-4 z-50 md:bottom-8 md:left-8"
       aria-hidden="true"
     >
-      <svg viewBox="0 0 64 64" className="leaf-bob h-14 w-14 drop-shadow-lg md:h-16 md:w-16">
-        <path d="M32 3 C51 17 55 41 32 61 C9 41 13 17 32 3 Z" fill="#5B7A99" />
-        <path
-          d="M32 9 C32 28 32 44 32 55"
-          stroke="#2E4257"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          fill="none"
-        />
-        <path d="M32 24 C40 26 44 30 46 36" stroke="#2E4257" strokeWidth="1.5" fill="none" />
-        <path d="M32 24 C24 26 20 30 18 36" stroke="#2E4257" strokeWidth="1.5" fill="none" />
-        <path d="M32 38 C38 40 41 43 42 48" stroke="#2E4257" strokeWidth="1.5" fill="none" />
-        <path d="M32 38 C26 40 23 43 22 48" stroke="#2E4257" strokeWidth="1.5" fill="none" />
-      </svg>
+      <div className="leaf-bob h-14 w-14 md:h-16 md:w-16">
+        <GutterScoop />
+      </div>
     </div>
   );
 }
